@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Pantilla</title>
+</head>
+<body>
+	<header th:fragment="header">
+		<h1 th:text="#{plantilla.titulo}"> </h1>
+	</header>
+	
+	<footer th:fragment="footer">
+	
+		<p>Exercici Modul13 
+			<a  >ES</a>
+			<a  >EN</a>
+		</p>
+		<p><a th:href="@{https://www.barcelonactiva.cat/es/itacademy}" target="_blank">ITACADEMY - Barcelona Activa</a></p>
+		<p>[[#{plantilla.pie}]] <a th:href="@{https://www.linkedin.com/in/joan}" target="_blank">Joan Luis</a></p>
+		<form method="post" th:action="@{/logout}">
+			<a href="#" onclick="this.parentNode.submit();">Logout</a>
+		</form>
+	</footer>
+</body>
+</html>

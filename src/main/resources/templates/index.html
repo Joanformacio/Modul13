@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Gestion Trabajadores</title>
+        <meta charset="UTF-8">
+    </head>
+    <body>
+    <!-- indiquem que haura de inserir aquest header per el de la plantilla - replace -->
+       <header th:replace="layout/plantilla::header"></header>
+        <a th:href="@{/agregar}" th:text="#{plantilla.agregar}"></a>
+        <div th:if="${trabajadores != null and !trabajadores.empty}">
+            <table border="1">
+                <tr>
+                    <th>[[#{cabecera.nombre}]]</th>
+                    <th>[[#{cabecera.apellido}]]</th>
+                    <th>[[#{cabecera.email}]]</th>
+                    <th>[[#{cabecera.tel}]]</th>
+                    <th>[[#{cabecera.categoria}]]</th>
+                    <th>[[#{cabecera.salario}]]</th>
+                    <th>[[#{cabecera.editar}]]</th>
+                    <th>[[#{cabecera.eliminar}]]</th>
+                </tr>
+                <tr th:each="t : ${trabajadores}">
+                    <td th:text="${t.getName}">Mostrar Nombre</td>
+                    <td th:text="${t.getSurname}">Mostrar Apellido</td>
+                    <td th:text="${t.getEmail}">Mostrar Email</td>
+                    <td th:text="${t.getPhone}">Mostrar Teléfono</td>
+                    <td th:text="${t.getCategory}">Mostrar categoria</td>
+                    <td th:text="${t.getSalary}">Mostrar Salario</td>
+                    <td><a th:href="@{/editar/} + ${t.getId}" >[[#{tabla.editar}]]</a></td>
+                    <td><a th:href="@{/eliminar/} + ${t.getId}" >[[#{tabla.eliminar}]]</a></td>
+                </tr>
+            </table>
+        </div>
+        <div th:if="${trabajadores == null or trabajadores.empty}">
+            [[#{lista.trabajador-vacia}]]
+        </div>
+        <footer th:replace="layout/plantilla::footer"></footer>
+    </body>
+</html>
