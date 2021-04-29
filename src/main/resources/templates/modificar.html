@@ -1,49 +1,52 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-		xmlns= "http: //wwww.w3.org/1999/xhtml">
+	xmlns="http: //wwww.w3.org/1999/xhtml">
 <head>
 <meta charset="ISO-8859-1">
 <title>Datos del Trabajador</title>
 </head>
 <body>
 	<!-- indiquem que haura de aquest header per el de la plantilla - replace -->
-       <header th:replace="layout/plantilla::header"></header>
+	<header th:replace="layout/plantilla::header"></header>
 	<h2>[[#{form.tituloh2}]]</h2>
 	<a th:href="@{/}">Go Back</a>
-	<br/>
+	<br />
 	<form th:action="@{/guardar}" method="post" th:object="${trabajador}">
-		<input type="hidden" name="id" th:field="*{id}">
-		
+		<input type="hidden" name="id" th:field="*{id}"> 
 		<label for="name"> [[#{cabecera.nombre}]]</label>
 		<input type="text" name="name" th:field="*{name}">
 		<span th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Error Nombre</span>
-		
-		<br/>
+		<br />	 
+			
 		<label for="surname"> [[#{cabecera.apellido}]]</label>
-		<input type="text" name="surname" th:field="*{surname}">
-		<span th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}">Error Apellido</span>
-		
-		<br/>
-		<label for="email">[[#{cabecera.email}]]</label>
+		<input type="text" name="surname" th:field="*{surname}"> 
+		<span th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}">Error Apellido</span> 
+			
+		<br />	 
+		<label for="email">[[#{cabecera.email}]]</label> 
 		<input type="text" name="email" th:field="*{email}">
 		<span th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Error Email</span>
-		
-		<br/>
-		<label for="tel"> [[#{cabecera.tel}]]</label>
+			
+		<br />	  
+		<label for="tel"> [[#{cabecera.tel}]]</label> 
 		<input type="tel" name="tel" th:field="*{phone}">
+		<br /> 
 		
-		<br/>
-		<label for="categoria"> [[#{cabecera.categoria}]]</label>
+		<label for="categoria"> [[#{cabecera.categoria}]]</label>	 
 		<input type="text" name="categoria" th:field="*{category}">
+			
+		<br/> 	
 		
-		<br/>
-		<label for="salario"> [[#{cabecera.salario}]]</label>
-		<input type="number" name="salario" th:field="*{salary}">
+		<label for="salario"> [[#{cabecera.salario}]]</label> 
+		<input type="number"name="salario" th:field="${categoria.getSalario}">	
+			 
+		<br /> 	
+			
+		<input type="submit" name="guardar" th:value="#{boton.guardar}" />
 		
-		<br/>
-		<input type="submit" name="guardar" th:value="#{boton.guardar}"/>
-		
-	</form>
-	 <footer th:replace="layout/plantilla::footer"></footer>
+	</form>		
+
+	<footer th:replace="layout/plantilla::footer"></footer>
+	
 </body>
 </html>

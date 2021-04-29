@@ -2,15 +2,19 @@ package com.trabajadores.controllers;
 
 import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.userdetails.User;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
+
+import com.trabajadores.bean.Categoria;
 import com.trabajadores.bean.Trabajador;
+import com.trabajadores.service.CategoriaServiceImpl;
 import com.trabajadores.service.TrabajadorServiceImpl;
+
+
 
 
 
@@ -20,12 +24,14 @@ public class Controlador {
 	
 	@Autowired
 	private TrabajadorServiceImpl db;
+	private CategoriaServiceImpl tCategoria;
 	
 	@GetMapping("/")
-	public String inicio(Model model, @AuthenticationPrincipal User user) {
+	public String inicio(Model model) {
 		ArrayList<Trabajador> trabajadores =db.getTrabajadores();
 		
 		model.addAttribute("trabajadores", trabajadores);
+		
 		
 		return "index";
 		
@@ -33,6 +39,10 @@ public class Controlador {
 	
 	@GetMapping("/agregar")
 	public String agregar(Trabajador trabajador, Model model) {
+		
+		ArrayList<Categoria> categorias = tCategoria.getCategorias();
+		System.out.println(categorias.get(0).toString());
+		model.addAttribute("categorias", categorias);
 		
 		
 		return "modificar";
