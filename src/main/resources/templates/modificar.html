@@ -32,13 +32,13 @@
 		<input type="tel" name="tel" th:field="*{phone}">
 		<br /> 
 		
-		<label for="categoria"> [[#{cabecera.categoria}]]</label>	 
-		<input type="text" name="categoria" th:field="*{category}">
+		<label for="category"> [[#{cabecera.categoria}]]</label>	 
+		<input type="text" name="category" th:field="*{category}">
 			
 		<br/> 	
 		
 		<label for="salario"> [[#{cabecera.salario}]]</label> 
-		<input type="number"name="salario" th:field="${categoria.getSalario}">	
+		<input type="number"name="salario" th:field="*{salary}">	
 			 
 		<br /> 	
 			

@@ -1,5 +1,9 @@
 package com.trabajadores.service;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,6 +56,33 @@ public class TrabajadorServiceImpl implements TrabajadorService {
 	public void borrar(Trabajador trabajador ) {
 		
 		db.delete(trabajador);;
+		
+	}
+	
+	@Override 
+	public boolean compruebaUsuario(String usuario, String password){
+		boolean check=false;
+		
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			String conex="jdbc:mysql://localhost:3306/dbtreballadors";
+			Connection  conexion=DriverManager.getConnection(conex,"root", "joan365");
+			Statement s= conexion.createStatement();
+			String sql="SELECT count(*) FROM usuarios WHERE usuario='"+usuario+"' "+ "and password= '"+ password+ "'";
+			s.execute(sql);
+			ResultSet rs= s.getResultSet();
+			rs.next();
+			
+			if(rs.getInt(1)>0) {
+				check=true;
+			}
+			
+		}catch(Exception e) {
+			System.out.println(e.getMessage());
+		}
+		
+		return check;
+		
 		
 	}
 }

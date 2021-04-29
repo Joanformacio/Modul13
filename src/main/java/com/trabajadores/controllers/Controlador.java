@@ -9,9 +9,9 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
-import com.trabajadores.bean.Categoria;
+
 import com.trabajadores.bean.Trabajador;
-import com.trabajadores.service.CategoriaServiceImpl;
+import com.trabajadores.bean.Usuario;
 import com.trabajadores.service.TrabajadorServiceImpl;
 
 
@@ -22,28 +22,37 @@ import com.trabajadores.service.TrabajadorServiceImpl;
 @RequestMapping("/")
 public class Controlador {
 	
+	Usuario usuario;
 	@Autowired
 	private TrabajadorServiceImpl db;
-	private CategoriaServiceImpl tCategoria;
+	
 	
 	@GetMapping("/")
 	public String inicio(Model model) {
-		ArrayList<Trabajador> trabajadores =db.getTrabajadores();
 		
-		model.addAttribute("trabajadores", trabajadores);
+		model.addAttribute("titulo", "FORMULARIO DE ACCESO");
 		
+		return "login";
 		
-		return "index";
+	}
+	
+	@PostMapping("/")
+	public String login(Usuario usuario, Model model) {
 		
+		if( db.compruebaUsuario(usuario.getNombre(), usuario.getPassword())) {
+			this.usuario=usuario;
+			ArrayList<Trabajador> trabajadores =db.getTrabajadores();
+			model.addAttribute("trabajadores", trabajadores);
+			model.addAttribute("usuario", this.usuario);
+			
+			return "index";
+		}else {
+			return "login";
+		}		
 	}
 	
 	@GetMapping("/agregar")
 	public String agregar(Trabajador trabajador, Model model) {
-		
-		ArrayList<Categoria> categorias = tCategoria.getCategorias();
-		System.out.println(categorias.get(0).toString());
-		model.addAttribute("categorias", categorias);
-		
 		
 		return "modificar";
 		

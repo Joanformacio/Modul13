@@ -10,4 +10,5 @@ public interface TrabajadorService {
 	public void modificar(Trabajador trabajador);
 	public Trabajador getTrabajador(Trabajador trabajador);
 	public void borrar(Trabajador trabajador);
+	public boolean compruebaUsuario( String usuario, String password);
 }
