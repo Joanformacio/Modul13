@@ -5,12 +5,11 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-
+import com.trabajadores.bean.Categoria;
 import com.trabajadores.bean.Trabajador;
 import com.trabajadores.dao.ITrabajadorDao;
 
@@ -21,7 +20,8 @@ public class TrabajadorServiceImpl implements TrabajadorService {
 	
 	@Autowired
 	 private ITrabajadorDao db;
-
+	
+	
 	@Override
 	@Transactional(readOnly = true)
 	public ArrayList<Trabajador> getTrabajadores() {
@@ -83,6 +83,35 @@ public class TrabajadorServiceImpl implements TrabajadorService {
 		
 		return check;
 		
-		
 	}
+
+	@Override
+	public ArrayList<Categoria> getCategorias() {
+		ArrayList<Categoria> listCategoria = new ArrayList<Categoria>();
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			String conex="jdbc:mysql://localhost:3306/dbtreballadors";
+			Connection  conexion=DriverManager.getConnection(conex,"root", "joan365");
+			Statement s= conexion.createStatement();
+			String sql="SELECT * FROM categorias";
+			s.execute(sql);
+			ResultSet rs= s.getResultSet();
+			
+			while(rs.next()) {
+				String categoria=rs.getString(1).toString();
+				double salario= rs.getInt(2);
+				Categoria c= new Categoria(categoria, salario);
+				listCategoria.add(c);
+			}
+			
+		}catch(Exception e) {
+			System.out.println(e.getMessage());
+		}
+		
+		return listCategoria;
+	}
+	
+	
+	
+
 }

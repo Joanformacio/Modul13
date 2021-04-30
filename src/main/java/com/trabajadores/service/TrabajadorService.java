@@ -1,8 +1,8 @@
 package com.trabajadores.service;
 
 import java.util.ArrayList;
-
 import com.trabajadores.bean.*;
+
 public interface TrabajadorService {
 	
 	public ArrayList<Trabajador> getTrabajadores();
@@ -11,4 +11,6 @@ public interface TrabajadorService {
 	public Trabajador getTrabajador(Trabajador trabajador);
 	public void borrar(Trabajador trabajador);
 	public boolean compruebaUsuario( String usuario, String password);
+	public ArrayList<Categoria> getCategorias();
+	
 }

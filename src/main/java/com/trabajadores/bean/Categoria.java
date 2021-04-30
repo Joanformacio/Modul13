@@ -1,17 +1,15 @@
 package com.trabajadores.bean;
 
 
-
-
 public class Categoria {
-	
-	
+		
 	private String categoria;
 	private double salario;
 	
 	
-	public Categoria() {
-		
+	public Categoria(String categoria, double salario) {
+		this.categoria=categoria;
+		this.salario=salario;
 	}
 
 

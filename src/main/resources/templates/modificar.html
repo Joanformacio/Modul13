@@ -33,8 +33,13 @@
 		<br /> 
 		
 		<label for="category"> [[#{cabecera.categoria}]]</label>	 
-		<input type="text" name="category" th:field="*{category}">
-			
+		
+		<select name="categoria">
+                         <option value="" selected> -- </option>
+                         <option th:each="c : ${categorias}"
+                            th:value="${c.categoria}"
+                            th:text="${c.categoria}"/>
+        </select>	
 		<br/> 	
 		
 		<label for="salario"> [[#{cabecera.salario}]]</label> 
