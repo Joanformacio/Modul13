@@ -29,7 +29,7 @@ public class Controlador {
 	@GetMapping("/")
 	public String inicio(Model model) {
 		
-		model.addAttribute("titulo", "FORMULARIO DE ACCESO");
+		
 		
 		return "login";
 		
@@ -54,7 +54,7 @@ public class Controlador {
 	@GetMapping("/agregar")
 	public String agregar(Trabajador trabajador, Model model) {
 		final ArrayList<Categoria> categorias =db.getCategorias();
-		System.out.println(categorias.get(0));
+		
 		model.addAttribute("categorias", categorias);
 		return "modificar";
 		
