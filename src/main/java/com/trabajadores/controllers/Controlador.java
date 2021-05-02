@@ -65,6 +65,13 @@ public class Controlador {
 		if(errores.hasErrors()) {
 			return "modificar";
 		}
+		final ArrayList<Categoria> categorias =db.getCategorias();
+		for (Categoria c: categorias) {
+			if(trabajador.getCategory().equals(c.getCategoria())) {
+				System.out.println(c.getSalario());
+				trabajador.setSalary(c.getSalario());
+			}
+		}
 		db.insertar(trabajador);
 		ArrayList<Trabajador> trabajadores =db.getTrabajadores();
 		
@@ -75,9 +82,10 @@ public class Controlador {
 	@GetMapping("/editar/{id}")
 	public String editar(Trabajador trabajador, Model model) {
 		trabajador= db.getTrabajador(trabajador);
+		final ArrayList<Categoria> categorias =db.getCategorias();
 		
+		model.addAttribute("categorias", categorias);
 		model.addAttribute("trabajador", trabajador);
-		
 		return "modificar";
 		
 	}
@@ -86,7 +94,7 @@ public class Controlador {
 	public String eliminar(Trabajador trabajador, Model model) {
 		 db.borrar(trabajador);
 	
-		return "modificar";
+		return "redirect:/";
 		
 	}
 }

@@ -67,7 +67,7 @@
 									
 										<label for="category"> [[#{cabecera.categoria}]]</label>	 
 									
-										<select id="disabledSelect" class="form-control" name="categoria">
+										<select id="disabledSelect" class="form-control" name="category">
 								                         <option value="" selected> -- </option>
 								                         <option th:each="c : ${categorias}"
 								                            th:value="${c.categoria}"
@@ -75,11 +75,11 @@
 								        </select>	
 									</div>
 									
-									<div class="form-group">
+									<!--  <div class="form-group">
 									
 										<label for="salario"> [[#{cabecera.salario}]]</label> 
 										<input class="form-control " type="number"name="salario" th:field="*{salary}">
-									</div>
+									</div>-->
 									
 									<input class="btn btn-primary" type="submit" name="guardar" th:value="#{boton.guardar}" />	
 									
